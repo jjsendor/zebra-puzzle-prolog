@@ -47,16 +47,9 @@ puzzle(FirstHouse, SecondHouse, MiddleHouse, FourthHouse, LastHouse,
     OldGoldsSmoker, KoolsSmoker, ChesterfieldsSmoker, LuckyStrikeSmoker, ParliamentsSmoker,
     DogOwner, SnailsOwner, FoxOwner, HorseOwner, ZebraOwner) :-
         lives_right_to(SecondHouseOwner, FirstHouseOwner),
-        neighbor(SecondHouseOwner, FirstHouseOwner),
-
         lives_right_to(MiddleHouseOwner, SecondHouseOwner),
-        neighbor(MiddleHouseOwner, SecondHouseOwner),
-
         lives_right_to(FourthHouseOwner, MiddleHouseOwner),
-        neighbor(FourthHouseOwner, MiddleHouseOwner),
-
         lives_right_to(LastHouseOwner, FourthHouseOwner),
-        neighbor(LastHouseOwner, FourthHouseOwner),
 
         house(FirstHouse),
         house(SecondHouse),
@@ -127,7 +120,6 @@ puzzle(FirstHouse, SecondHouse, MiddleHouse, FourthHouse, LastHouse,
         drinks(GreenHouseOwner, coffee),
 
         lives_right_to(GreenHouseOwner, IvoryHouseOwner),
-        neighbor(GreenHouseOwner, IvoryHouseOwner),
 
         owns(OldGoldsSmoker, snails),
 
