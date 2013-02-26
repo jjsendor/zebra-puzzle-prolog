@@ -8,11 +8,13 @@ is_right_to(middle_house, second_house).
 is_right_to(fourth_house, middle_house).
 is_right_to(last_house, fourth_house).
 
-lives_left_to(Person1, Person2) :- inhabits(Person1, House1), inhabits(Person2, House2), is_left_to(House1, House2).
-lives_right_to(Person1, Person2) :- inhabits(Person1, House1), inhabits(Person2, House2), is_right_to(House1, House2).
+lives_left_to(Person1, Person2) :- \+(Person1 = Person2), inhabits(Person1, House1), inhabits(Person2, House2), is_left_to(House1, House2).
+lives_right_to(Person1, Person2) :- \+(Person1 = Person2), inhabits(Person1, House1), inhabits(Person2, House2), is_right_to(House1, House2).
 
 neighbor(X, Y) :- lives_left_to(X, Y).
+neighbor(X, Y) :- lives_left_to(Y, X).
 neighbor(X, Y) :- lives_right_to(X, Y).
+neighbor(X, Y) :- lives_right_to(Y, X).
 
 
 lives_in(englishman, red).
@@ -135,25 +137,100 @@ puzzle(FirstHouseOwner, SecondHouseOwner, MiddleHouseOwner, FourthHouseOwner, La
     CoffeeDrinker, TeaDrinker, MilkDrinker, JuiceDrinker, WaterDrinker,
     OldGoldsSmoker, KoolsSmoker, ChesterfieldsSmoker, LuckyStrikeSmoker, ParliamentsSmoker,
     DogOwner, SnailsOwner, FoxOwner, HorseOwner, ZebraOwner) :-
-        lives_left_to(FirstHouseOwner, SecondHouseOwner),
-        lives_right_to(SecondHouseOwner, FirstHouseOwner),
-        neighbor(FirstHouseOwner, SecondHouseOwner),
-        neighbor(SecondHouseOwner, FirstHouseOwner),
+        \+(FirstHouseOwner = SecondHouseOwner),
+        \+(FirstHouseOwner = MiddleHouseOwner),
+        \+(FirstHouseOwner = FourthHouseOwner),
+        \+(FirstHouseOwner = LastHouseOwner),
 
-        lives_left_to(SecondHouseOwner, MiddleHouseOwner),
-        lives_right_to(MiddleHouseOwner, SecondHouseOwner),
-        neighbor(SecondHouseOwner, MiddleHouseOwner),
-        neighbor(MiddleHouseOwner, SecondHouseOwner),
+        \+(SecondHouseOwner = MiddleHouseOwner),
+        \+(SecondHouseOwner = FourthHouseOwner),
+        \+(SecondHouseOwner = LastHouseOwner),
 
-        lives_left_to(MiddleHouseOwner, FourthHouseOwner),
-        lives_right_to(FourthHouseOwner, MiddleHouseOwner),
-        neighbor(MiddleHouseOwner, FourthHouseOwner),
-        neighbor(FourthHouseOwner, MiddleHouseOwner),
+        \+(MiddleHouseOwner = FourthHouseOwner),
+        \+(MiddleHouseOwner = LastHouseOwner),
 
-        lives_left_to(FourthHouseOwner, LastHouseOwner),
-        lives_right_to(LastHouseOwner, FourthHouseOwner),
-        neighbor(FourthHouseOwner, LastHouseOwner),
-        neighbor(LastHouseOwner, FourthHouseOwner),
+        \+(FourthHouseOwner = LastHouseOwner),
+
+
+        \+(RedHouseOwner = GreenHouseOwner),
+        \+(RedHouseOwner = IvoryHouseOwner),
+        \+(RedHouseOwner = YellowHouseOwner),
+        \+(RedHouseOwner = BlueHouseOwner),
+
+        \+(GreenHouseOwner = IvoryHouseOwner),
+        \+(GreenHouseOwner = YellowHouseOwner),
+        \+(GreenHouseOwner = BlueHouseOwner),
+
+        \+(IvoryHouseOwner = YellowHouseOwner),
+        \+(IvoryHouseOwner = BlueHouseOwner),
+
+        \+(YellowHouseOwner = BlueHouseOwner),
+
+
+        \+(CoffeeDrinker = TeaDrinker),
+        \+(CoffeeDrinker = MilkDrinker),
+        \+(CoffeeDrinker = JuiceDrinker),
+        \+(CoffeeDrinker = WaterDrinker),
+
+        \+(TeaDrinker = MilkDrinker),
+        \+(TeaDrinker = JuiceDrinker),
+        \+(TeaDrinker = WaterDrinker),
+
+        \+(MilkDrinker = JuiceDrinker),
+        \+(MilkDrinker = WaterDrinker),
+
+        \+(JuiceDrinker = WaterDrinker),
+
+
+        \+(OldGoldsSmoker = KoolsSmoker),
+        \+(OldGoldsSmoker = ChesterfieldsSmoker),
+        \+(OldGoldsSmoker = LuckyStrikeSmoker),
+        \+(OldGoldsSmoker = ParliamentsSmoker),
+
+        \+(KoolsSmoker = ChesterfieldsSmoker),
+        \+(KoolsSmoker = LuckyStrikeSmoker),
+        \+(KoolsSmoker = ParliamentsSmoker),
+
+        \+(ChesterfieldsSmoker = LuckyStrikeSmoker),
+        \+(ChesterfieldsSmoker = ParliamentsSmoker),
+
+        \+(LuckyStrikeSmoker = ParliamentsSmoker),
+
+
+        \+(DogOwner = SnailsOwner),
+        \+(DogOwner = FoxOwner),
+        \+(DogOwner = HorseOwner),
+        \+(DogOwner = ZebraOwner),
+
+        \+(SnailsOwner = FoxOwner),
+        \+(SnailsOwner = HorseOwner),
+        \+(SnailsOwner = ZebraOwner),
+
+        \+(FoxOwner = HorseOwner),
+        \+(FoxOwner = ZebraOwner),
+
+        \+(HorseOwner = ZebraOwner),
+
+
+        %lives_left_to(FirstHouseOwner, SecondHouseOwner),
+        %lives_right_to(SecondHouseOwner, FirstHouseOwner),
+        %neighbor(FirstHouseOwner, SecondHouseOwner),
+        %neighbor(SecondHouseOwner, FirstHouseOwner),
+
+        %lives_left_to(SecondHouseOwner, MiddleHouseOwner),
+        %lives_right_to(MiddleHouseOwner, SecondHouseOwner),
+        %neighbor(SecondHouseOwner, MiddleHouseOwner),
+        %neighbor(MiddleHouseOwner, SecondHouseOwner),
+
+        %lives_left_to(MiddleHouseOwner, FourthHouseOwner),
+        %lives_right_to(FourthHouseOwner, MiddleHouseOwner),
+        %neighbor(MiddleHouseOwner, FourthHouseOwner),
+        %neighbor(FourthHouseOwner, MiddleHouseOwner),
+
+        %lives_left_to(FourthHouseOwner, LastHouseOwner),
+        %lives_right_to(LastHouseOwner, FourthHouseOwner),
+        %neighbor(FourthHouseOwner, LastHouseOwner),
+        %neighbor(LastHouseOwner, FourthHouseOwner),
 
         inhabits(FirstHouseOwner, first_house),
         inhabits(SecondHouseOwner, second_house),
@@ -189,8 +266,8 @@ puzzle(FirstHouseOwner, SecondHouseOwner, MiddleHouseOwner, FourthHouseOwner, La
 
         lives_right_to(GreenHouseOwner, IvoryHouseOwner),
         lives_left_to(IvoryHouseOwner, GreenHouseOwner),
-        neighbor(GreenHouseOwner, IvoryHouseOwner),
-        neighbor(IvoryHouseOwner, GreenHouseOwner),
+        %neighbor(GreenHouseOwner, IvoryHouseOwner),
+        %neighbor(IvoryHouseOwner, GreenHouseOwner),
 
         owns(OldGoldsSmoker, snails),
 
