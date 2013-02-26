@@ -36,8 +36,7 @@ drinks(ukrainian, tea).
 
 smokes(japanese, parliaments).
 
-lives_left_to(X, Y) :- lives_right_to(Y, X).
-lives_right_to(X, Y) :- lives_left_to(Y, X).
+neighbor(X, Y) :- neighbor(Y, X).
 
 puzzle(FirstHouse, SecondHouse, MiddleHouse, FourthHouse, LastHouse,
     FirstHouseOwner, SecondHouseOwner, MiddleHouseOwner, FourthHouseOwner, LastHouseOwner,
@@ -47,22 +46,18 @@ puzzle(FirstHouse, SecondHouse, MiddleHouse, FourthHouse, LastHouse,
     DogOwner, SnailsOwner, FoxOwner, HorseOwner, ZebraOwner) :-
         lives_left_to(FirstHouseOwner, SecondHouseOwner),
         lives_right_to(SecondHouseOwner, FirstHouseOwner),
-        neighbor(FirstHouseOwner, SecondHouseOwner),
         neighbor(SecondHouseOwner, FirstHouseOwner),
 
         lives_left_to(SecondHouseOwner, MiddleHouseOwner),
         lives_right_to(MiddleHouseOwner, SecondHouseOwner),
-        neighbor(SecondHouseOwner, MiddleHouseOwner),
         neighbor(MiddleHouseOwner, SecondHouseOwner),
 
         lives_left_to(MiddleHouseOwner, FourthHouseOwner),
         lives_right_to(FourthHouseOwner, MiddleHouseOwner),
-        neighbor(MiddleHouseOwner, FourthHouseOwner),
         neighbor(FourthHouseOwner, MiddleHouseOwner),
 
         lives_left_to(FourthHouseOwner, LastHouseOwner),
         lives_right_to(LastHouseOwner, FourthHouseOwner),
-        neighbor(FourthHouseOwner, LastHouseOwner),
         neighbor(LastHouseOwner, FourthHouseOwner),
 
         house(FirstHouse),
@@ -136,7 +131,6 @@ puzzle(FirstHouse, SecondHouse, MiddleHouse, FourthHouse, LastHouse,
         lives_right_to(GreenHouseOwner, IvoryHouseOwner),
         lives_left_to(IvoryHouseOwner, GreenHouseOwner),
         neighbor(GreenHouseOwner, IvoryHouseOwner),
-        neighbor(IvoryHouseOwner, GreenHouseOwner),
 
         owns(OldGoldsSmoker, snails),
 
@@ -147,13 +141,10 @@ puzzle(FirstHouse, SecondHouse, MiddleHouse, FourthHouse, LastHouse,
         lives_in(norwegian, FirstHouse),
 
         neighbor(ChesterfieldsSmoker, FoxOwner),
-        neighbor(FoxOwner, ChesterfieldsSmoker),
 
         neighbor(KoolsSmoker, HorseOwner),
-        neighbor(HorseOwner, KoolsSmoker),
 
         drinks(LuckyStrikeSmoker, juice),
 
-        neighbor(norwegian, BlueHouseOwner),
-        neighbor(BlueHouseOwner, norwegian).
+        neighbor(norwegian, BlueHouseOwner).
 
