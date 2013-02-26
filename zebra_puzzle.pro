@@ -40,8 +40,7 @@ neighbor(X, Y) :- neighbor(Y, X).
 
 lives_right_to(X, Y) :- neighbor(X, Y).
 
-puzzle(FirstHouse, SecondHouse, MiddleHouse, FourthHouse, LastHouse,
-    FirstHouseOwner, SecondHouseOwner, MiddleHouseOwner, FourthHouseOwner, LastHouseOwner,
+puzzle(FirstHouseOwner, SecondHouseOwner, MiddleHouseOwner, FourthHouseOwner, LastHouseOwner,
     RedHouseOwner, GreenHouseOwner, IvoryHouseOwner, YellowHouseOwner, BlueHouseOwner,
     CoffeeDrinker, TeaDrinker, MilkDrinker, JuiceDrinker, WaterDrinker,
     OldGoldsSmoker, KoolsSmoker, ChesterfieldsSmoker, LuckyStrikeSmoker, ParliamentsSmoker,
@@ -50,12 +49,6 @@ puzzle(FirstHouse, SecondHouse, MiddleHouse, FourthHouse, LastHouse,
         lives_right_to(MiddleHouseOwner, SecondHouseOwner),
         lives_right_to(FourthHouseOwner, MiddleHouseOwner),
         lives_right_to(LastHouseOwner, FourthHouseOwner),
-
-        house(FirstHouse),
-        house(SecondHouse),
-        house(MiddleHouse),
-        house(FourthHouse),
-        house(LastHouse),
 
         person(FirstHouseOwner),
         person(SecondHouseOwner),
@@ -86,12 +79,6 @@ puzzle(FirstHouse, SecondHouse, MiddleHouse, FourthHouse, LastHouse,
         person(FoxOwner),
         person(HorseOwner),
         person(ZebraOwner),
-
-        lives_in(FirstHouseOwner, FirstHouse),
-        lives_in(SecondHouseOwner, SecondHouse),
-        lives_in(MiddleHouseOwner, MiddleHouse),
-        lives_in(FourthHouseOwner, FourthHouse),
-        lives_in(LastHouseOwner, LastHouse),
 
         lives_in(RedHouseOwner, red),
         lives_in(GreenHouseOwner, green),
@@ -127,7 +114,7 @@ puzzle(FirstHouse, SecondHouse, MiddleHouse, FourthHouse, LastHouse,
 
         drinks(MiddleHouseOwner, milk),
 
-        lives_in(norwegian, FirstHouse),
+        lives_right_to(SecondHouseOwner, norwegian),
 
         neighbor(ChesterfieldsSmoker, FoxOwner),
 
