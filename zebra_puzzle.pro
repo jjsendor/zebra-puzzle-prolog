@@ -4,6 +4,22 @@ person(ukrainian).
 person(norwegian).
 person(japanese).
 
+is_left_to(first_house, second_house).
+is_left_to(second_house, middle_house).
+is_left_to(middle_house, fourth_house).
+is_left_to(fourth_house, last_house).
+
+is_right_to(second_house, first_house).
+is_right_to(middle_house, second_house).
+is_right_to(fourth_house, middle_house).
+is_right_to(last_house, fourth_house).
+
+lives_left_to(Person1, Person2) :- inhabits(Person1, House1), inhabits(Person2, House2), is_left_to(House1, House2).
+lives_right_to(Person1, Person2) :- inhabits(Person1, House1), inhabits(Person2, House2), is_right_to(House1, House2).
+
+neighbor(X, Y) :- lives_left_to(X, Y).
+neighbor(X, Y) :- lives_right_to(X, Y).
+
 lives_in(englishman, red).
 
 owns(spaniard, dog).
@@ -14,21 +30,31 @@ smokes(japanese, parliaments).
 
 inhabits(norwegian, first_house).
 
-lives_left_to(X, Y) :- lives_right_to(Y, X).
-lives_right_to(X, Y) :- lives_left_to(Y, X).
-
-neighbor(X, Y) :- lives_left_to(X, Y).
-neighbor(X, Y) :- lives_right_to(X, Y).
 
 puzzle(FirstHouseOwner, SecondHouseOwner, MiddleHouseOwner, FourthHouseOwner, LastHouseOwner,
     RedHouseOwner, GreenHouseOwner, IvoryHouseOwner, YellowHouseOwner, BlueHouseOwner,
     CoffeeDrinker, TeaDrinker, MilkDrinker, JuiceDrinker, WaterDrinker,
     OldGoldsSmoker, KoolsSmoker, ChesterfieldsSmoker, LuckyStrikeSmoker, ParliamentsSmoker,
     DogOwner, SnailsOwner, FoxOwner, HorseOwner, ZebraOwner) :-
-        lives_right_to(SecondHouseOwner, FirstHouseOwner),
-        lives_right_to(MiddleHouseOwner, SecondHouseOwner),
-        lives_right_to(FourthHouseOwner, MiddleHouseOwner),
-        lives_right_to(LastHouseOwner, FourthHouseOwner),
+%        lives_left_to(FirstHouseOwner, SecondHouseOwner),
+%        lives_right_to(SecondHouseOwner, FirstHouseOwner),
+%        neighbor(FirstHouseOwner, SecondHouseOwner),
+%        neighbor(SecondHouseOwner, FirstHouseOwner),
+
+%        lives_left_to(SecondHouseOwner, MiddleHouseOwner),
+%        lives_right_to(MiddleHouseOwner, SecondHouseOwner),
+%        neighbor(SecondHouseOwner, MiddleHouseOwner),
+%        neighbor(MiddleHouseOwner, SecondHouseOwner),
+
+%        lives_left_to(MiddleHouseOwner, FourthHouseOwner),
+%        lives_right_to(FourthHouseOwner, MiddleHouseOwner),
+%        neighbor(MiddleHouseOwner, FourthHouseOwner),
+%        neighbor(FourthHouseOwner, MiddleHouseOwner),
+
+%        lives_left_to(FourthHouseOwner, LastHouseOwner),
+%        lives_right_to(LastHouseOwner, FourthHouseOwner),
+%        neighbor(FourthHouseOwner, LastHouseOwner),
+%        neighbor(LastHouseOwner, FourthHouseOwner),
 
         person(FirstHouseOwner),
         person(SecondHouseOwner),
@@ -93,6 +119,9 @@ puzzle(FirstHouseOwner, SecondHouseOwner, MiddleHouseOwner, FourthHouseOwner, La
         drinks(GreenHouseOwner, coffee),
 
         lives_right_to(GreenHouseOwner, IvoryHouseOwner),
+        lives_left_to(IvoryHouseOwner, GreenHouseOwner),
+        neighbor(GreenHouseOwner, IvoryHouseOwner),
+        neighbor(IvoryHouseOwner, GreenHouseOwner),
 
         owns(OldGoldsSmoker, snails),
 
@@ -110,4 +139,3 @@ puzzle(FirstHouseOwner, SecondHouseOwner, MiddleHouseOwner, FourthHouseOwner, La
 
         neighbor(norwegian, BlueHouseOwner),
         neighbor(BlueHouseOwner, norwegian).
-
