@@ -4,30 +4,6 @@ person(ukrainian).
 person(norwegian).
 person(japanese).
 
-house(red).
-house(green).
-house(ivory).
-house(yellow).
-house(blue).
-
-drink(coffee).
-drink(tea).
-drink(milk).
-drink(juice).
-drink(water).
-
-cigarette(old_golds).
-cigarette(kools).
-cigarette(chesterfields).
-cigarette(lucky_strike).
-cigarette(parliaments).
-
-pet(dog).
-pet(snails).
-pet(fox).
-pet(horse).
-pet(zebra).
-
 lives_in(englishman, red).
 
 owns(spaniard, dog).
