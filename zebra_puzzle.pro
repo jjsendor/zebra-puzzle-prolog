@@ -38,8 +38,7 @@ smokes(japanese, parliaments).
 
 neighbor(X, Y) :- neighbor(Y, X).
 
-lives_left_to(X, Y) :- lives_right_to(Y, X).
-lives_right_to(X, Y) :- lives_left_to(Y, X).
+lives_right_to(X, Y) :- neighbor(X, Y).
 
 puzzle(FirstHouse, SecondHouse, MiddleHouse, FourthHouse, LastHouse,
     FirstHouseOwner, SecondHouseOwner, MiddleHouseOwner, FourthHouseOwner, LastHouseOwner,
@@ -47,16 +46,16 @@ puzzle(FirstHouse, SecondHouse, MiddleHouse, FourthHouse, LastHouse,
     CoffeeDrinker, TeaDrinker, MilkDrinker, JuiceDrinker, WaterDrinker,
     OldGoldsSmoker, KoolsSmoker, ChesterfieldsSmoker, LuckyStrikeSmoker, ParliamentsSmoker,
     DogOwner, SnailsOwner, FoxOwner, HorseOwner, ZebraOwner) :-
-        lives_left_to(FirstHouseOwner, SecondHouseOwner),
+        lives_right_to(SecondHouseOwner, FirstHouseOwner),
         neighbor(SecondHouseOwner, FirstHouseOwner),
 
-        lives_left_to(SecondHouseOwner, MiddleHouseOwner),
+        lives_right_to(MiddleHouseOwner, SecondHouseOwner),
         neighbor(MiddleHouseOwner, SecondHouseOwner),
 
-        lives_left_to(MiddleHouseOwner, FourthHouseOwner),
+        lives_right_to(FourthHouseOwner, MiddleHouseOwner),
         neighbor(FourthHouseOwner, MiddleHouseOwner),
 
-        lives_left_to(FourthHouseOwner, LastHouseOwner),
+        lives_right_to(LastHouseOwner, FourthHouseOwner),
         neighbor(LastHouseOwner, FourthHouseOwner),
 
         house(FirstHouse),
